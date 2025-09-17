@@ -79,7 +79,7 @@
 		<resource-file src="src/android/res/drawable/ic_hand.xml" target="res/drawable/ic_hand.xml" />
 		
 		<!-- MediaPipe Model -->
-		<asset-file src="src/models/hand_landmarker.task" target="models/hand_landmarker.task" />
+		<asset-file src="src/models/hand_landmarker.task" target="assets/models/hand_landmarker.task" />
 		
 		<!-- Gradle Dependencies -->
 		<framework src="src/android/build.gradle" custom="true" type="gradleReference" />

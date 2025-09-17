@@ -10,12 +10,12 @@ public class HandDetection {
     public final List<NormalizedLandmark> landmarks;
     public final String handedness;
     public final float confidence;
-    
-    public HandDetection(RPSGesture gesture, 
-                        RectF boundingBox, 
-                        List<NormalizedLandmark> landmarks, 
-                        String handedness, 
-                        float confidence) {
+
+    public HandDetection(RPSGesture gesture,
+                         RectF boundingBox,
+                         List<NormalizedLandmark> landmarks,
+                         String handedness,
+                         float confidence) {
         this.gesture = gesture;
         this.boundingBox = boundingBox;
         this.landmarks = landmarks;
