@@ -1,9 +1,9 @@
 {
-  "name": "outsystems-plugin-stone_paper_scissors",
+  "name": "outsystems-plugin-rock_paper_scissors",
   "version": "1.0.0",
   "description": "Play Rock, Paper and Scissors using AI!",
   "cordova": {
-    "id": "outsystems-plugin-stone_paper_scissors",
+    "id": "outsystems-plugin-rock_paper_scissors",
     "platforms": [
       "ios"
     ]

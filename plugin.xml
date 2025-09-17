@@ -1,32 +1,87 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="outsystems-plugin-stone_paper_scissors" version="1.0.0"
+<plugin id="outsystems-plugin-rock_paper_scissors" version="1.0.0"
 	xmlns="http://apache.org/cordova/ns/plugins/1.0"
 	xmlns:android="http://schemas.android.com/apk/res/android">
-	<name>StonePaperScissors</name>
-	<js-module name="StonePaperScissors" src="www/StonePaperScissors.js">
-		<clobbers target="cordova.plugins.StonePaperScissors" />
+	<name>RockPaperScissors</name>
+	<js-module name="RockPaperScissors" src="www/RockPaperScissors.js">
+		<clobbers target="cordova.plugins.RockPaperScissors" />
 	</js-module>
+
+	<!-- iOS Platform -->
 	<platform name="ios">
 		<config-file parent="/*" target="config.xml">
 			<feature name="RPSGamePlugin">
 				<param name="ios-package" value="RPSGamePlugin" />
 			</feature>
 		</config-file>
+
+		<!-- Hooks -->
 		<hook type="before_plugin_install" src="hooks/install_prerequisites.js"/>
-        <hook type="after_plugin_add" src="hooks/add_swift_support.js" />
+      <hook type="after_plugin_add" src="hooks/add_swift_support.js" />
+		
+		<!-- Source Files -->
 		<source-file src="src/ios/RPSGamePlugin.swift" />
-	    <source-file src="src/ios/RPSGesture.swift" />
-	    <resource-file src="src/ios/Main.storyboard" target="Resources/Main.storyboard" />
-	    <resource-file src="src/models/hand_landmarker.task" target="hand_landmarker.task" />
-	    <podspec>
-            <config>
-            </config>
-            <pods use-frameworks="true">
-               <pod name="MediaPipeTasksVision" spec="0.10.21"/>
-            </pods>
-        </podspec>
-        <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
-   			<string>"Camera permission required for playing RPS!"</string>
-   		</config-file>
+	   <source-file src="src/ios/RPSGesture.swift" />
+	   <resource-file src="src/ios/Main.storyboard" target="Resources/Main.storyboard" />
+	   <resource-file src="src/models/hand_landmarker.task" target="hand_landmarker.task" />
+
+	   <!-- Cocoapods Dependencies -->
+	   <podspec>
+           <config>
+           </config>
+           <pods use-frameworks="true">
+              <pod name="MediaPipeTasksVision" spec="0.10.21"/>
+           </pods>
+      </podspec>
+
+      <!-- Permissions -->
+      <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
+   		<string>"Camera permission required for playing RPS!"</string>
+   	</config-file>
+
+	</platform>
+
+	<!-- Android Platform -->
+	<platform name="android">
+		<config-file parent="/*" target="res/xml/config.xml">
+			<feature name="RPSGamePlugin">
+				<param name="android-package" value="com.outsystems.plugins.rpsgame.RPSGamePlugin" />
+			</feature>
+		</config-file>
+		
+		<!-- Permissions -->
+		<config-file target="AndroidManifest.xml" parent="/manifest">
+			<uses-permission android:name="android.permission.CAMERA" />
+			<uses-feature android:name="android.hardware.camera" android:required="true" />
+			<uses-feature android:name="android.hardware.camera.front" android:required="false" />
+		</config-file>
+		
+		<!-- Activity Declaration -->
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<activity
+				android:name="com.outsystems.plugins.rpsgame.RPSDetectionActivity"
+				android:screenOrientation="reverseLandscape"
+				android:theme="@style/Theme.AppCompat.NoActionBar"
+				android:exported="false" />
+		</config-file>
+		
+		<!-- Source Files -->
+		<source-file src="src/android/RPSGamePlugin.java" target-dir="src/com/outsystems/plugins/rpsgame" />
+		<source-file src="src/android/RPSDetectionActivity.java" target-dir="src/com/outsystems/plugins/rpsgame" />
+		<source-file src="src/android/RPSGesture.java" target-dir="src/com/outsystems/plugins/rpsgame" />
+		<source-file src="src/android/HandDetection.java" target-dir="src/com/outsystems/plugins/rpsgame" />
+		<source-file src="src/android/OverlayView.java" target-dir="src/com/outsystems/plugins/rpsgame" />
+		
+		<!-- Layout Resources -->
+		<resource-file src="src/android/res/layout/activity_rps_detection.xml" target="res/layout/activity_rps_detection.xml" />
+		<resource-file src="src/android/res/drawable/instructions_bg.xml" target="res/drawable/instructions_bg.xml" />
+		<resource-file src="src/android/res/drawable/button_bg.xml" target="res/drawable/button_bg.xml" />
+		<resource-file src="src/android/res/drawable/ic_hand.xml" target="res/drawable/ic_hand.xml" />
+		
+		<!-- MediaPipe Model -->
+		<asset-file src="src/models/hand_landmarker.task" target="models/hand_landmarker.task" />
+		
+		<!-- Gradle Dependencies -->
+		<framework src="src/android/build.gradle" custom="true" type="gradleReference" />
 	</platform>
 </plugin>
