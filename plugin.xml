@@ -42,7 +42,7 @@
    	<!-- Set Landscape Orientation -->
    	<edit-config file="*-Info.plist" mode="merge" target="UISupportedInterfaceOrientations">
 		    <array>
-		        <string>UIInterfaceOrientationLandscapeRight</string>
+		        <string>UIInterfaceOrientationLandscapeLeft</string>
 		    </array>
 		</edit-config>
 
