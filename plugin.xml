@@ -92,7 +92,9 @@
 		<framework src="src/android/build.gradle" custom="true" type="gradleReference" />
 
 		<!-- Set Landscape Orientation -->
-		<preference name="Orientation" value="landscape" />
-		
+		<config-file parent="/manifest/application/activity[@android:name='MainActivity']" target="AndroidManifest.xml">
+	       <activity android:screenOrientation="landscape" />
+	   </config-file>
+
 	</platform>
 </plugin>
