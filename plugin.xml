@@ -90,5 +90,9 @@
 		
 		<!-- Gradle Dependencies -->
 		<framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+
+		<!-- Set Landscape Orientation -->
+		<preference name="Orientation" value="landscape" />
+		
 	</platform>
 </plugin>
