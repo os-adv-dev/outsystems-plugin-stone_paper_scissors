@@ -22,6 +22,7 @@
 		<!-- Source Files -->
 		<source-file src="src/ios/RPSGamePlugin.swift" />
 	   <source-file src="src/ios/RPSGesture.swift" />
+	   <source-file src="src/ios/OrientationLock.m" />
 	   <resource-file src="src/ios/Main.storyboard" target="Resources/Main.storyboard" />
 	   <resource-file src="src/models/hand_landmarker.task" target="hand_landmarker.task" />
 
@@ -39,12 +40,12 @@
    		<string>"Camera permission required for playing RPS!"</string>
    	</config-file>
 
-   	<!-- Set Landscape Orientation -->
+   	<!-- Set Landscape Orientation 
    	<edit-config file="*-Info.plist" mode="replace" target="UISupportedInterfaceOrientations">
 		    <array>
 		        <string>UIInterfaceOrientationLandscapeLeft</string>
 		    </array>
-		</edit-config>
+		</edit-config>-->
 
 	</platform>
 
