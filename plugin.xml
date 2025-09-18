@@ -39,6 +39,13 @@
    		<string>"Camera permission required for playing RPS!"</string>
    	</config-file>
 
+   	<!-- Set Landscape Orientation -->
+   	<edit-config file="*-Info.plist" mode="merge" target="UISupportedInterfaceOrientations">
+		    <array>
+		        <string>UIInterfaceOrientationLandscapeRight</string>
+		    </array>
+		</edit-config>
+
 	</platform>
 
 	<!-- Android Platform -->
