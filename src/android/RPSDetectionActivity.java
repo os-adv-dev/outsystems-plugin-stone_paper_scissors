@@ -115,7 +115,7 @@ public class RPSDetectionActivity extends AppCompatActivity {
     }
 
     private void setupUI() {
-        instructionsLabel.setText("Show your hands to play Rock, Paper, and Scissors!");
+        instructionsLabel.setText("Show your hands to play Rock, Paper, Scissors!");
         player1Label.setText("Player 1: --");
         player2Label.setText("Player 2: --");
         winnerLabel.setText("");

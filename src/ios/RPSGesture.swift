@@ -164,7 +164,7 @@ class RPSDetectionViewController: UIViewController {
             .shadow: shadow
         ]
 
-        let instructionText = "Show your hands to play Rock, Paper, and Scissors!"
+        let instructionText = "Show your hands to play Rock, Paper, Scissors!"
         instructionsLabel.attributedText = NSAttributedString(string: instructionText, attributes: attributes)
         
         self.handImage.alpha = 1
@@ -341,7 +341,7 @@ class RPSDetectionViewController: UIViewController {
 
         case .landscapeRight:
             // Device held with the Lightning port on the LEFT (common selfie landscape)
-            // Match your observed mapping: right→down, up→left
+            // Match observed mapping: right→down, up→left
             // x' comes from original y, y' comes from original x (no inversion)
             return CGPoint(x: p.y * w, y: p.x * h)
 

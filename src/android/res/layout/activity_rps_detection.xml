@@ -45,7 +45,7 @@
             android:id="@+id/instructionsLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Show your hands to play Rock, Paper, and Scissors!"
+            android:text="Show your hands to play Rock, Paper, Scissors!"
             android:textColor="#FFFFFF"
             android:textSize="26sp"
             android:textStyle="bold"
