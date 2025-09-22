@@ -97,7 +97,7 @@ class RPSDetectionViewController: UIViewController {
         UIApplication.shared.isIdleTimerDisabled = true
         setupUI()
         setupMediaPipe()
-        setupCamera()
+        pinPreviewToEdges()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -110,6 +110,7 @@ class RPSDetectionViewController: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        pinPreviewToEdges()
         previewLayer?.frame = previewView.bounds
         detectionOverlayView.frame = previewView.bounds
     }
@@ -292,6 +293,24 @@ class RPSDetectionViewController: UIViewController {
             }
         }
         return .portrait
+    }
+
+    private func pinPreviewToEdges() {
+        guard let pv = previewView else { return }
+
+        // Remove any constraints that tie previewView to the Safe Area
+        for c in view.constraints where
+            (c.firstItem as? UIView) == pv || (c.secondItem as? UIView) == pv {
+            c.isActive = false
+        }
+
+        pv.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            pv.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            pv.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            pv.topAnchor.constraint(equalTo: view.topAnchor),
+            pv.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
 
     private func updateConnectionsForCurrentInterfaceOrientation() {
