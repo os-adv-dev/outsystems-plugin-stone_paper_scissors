@@ -97,6 +97,7 @@ class RPSDetectionViewController: UIViewController {
         UIApplication.shared.isIdleTimerDisabled = true
         setupUI()
         setupMediaPipe()
+        setupCamera()
         pinPreviewToEdges()
     }
     override func viewDidAppear(_ animated: Bool) {
