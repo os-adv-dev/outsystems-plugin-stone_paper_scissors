@@ -91,8 +91,8 @@
 	       file="app/src/main/AndroidManifest.xml"
 	       target="/manifest/application/activity[@android:name='MainActivity']"
 	       mode="merge">
-	       <activity android:screenOrientation="landscape" /> -->
-	   </edit-config>
+	       <activity android:screenOrientation="landscape" /> 
+	   </edit-config>-->
 
 	</platform>
 </plugin>
