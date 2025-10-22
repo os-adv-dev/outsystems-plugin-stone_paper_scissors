@@ -18,7 +18,7 @@
 		<!-- Hooks -->
 		<hook type="before_plugin_install" src="hooks/install_prerequisites.js"/>
       <hook type="after_plugin_add" src="hooks/add_swift_support.js" />
-                <hook src="hooks/set_ios_orientation.js" type="after_prepare" />
+    	<!-- <hook src="hooks/set_ios_orientation.js" type="after_prepare" /> -->
 		
 		<!-- Source Files -->
 		<source-file src="src/ios/RPSGamePlugin.swift" />
@@ -87,11 +87,11 @@
 		<framework src="src/android/build.gradle" custom="true" type="gradleReference" />
 
 		<!-- Set Landscape Orientation -->
-	   <edit-config
+	   <!--  <edit-config
 	       file="app/src/main/AndroidManifest.xml"
 	       target="/manifest/application/activity[@android:name='MainActivity']"
 	       mode="merge">
-	       <activity android:screenOrientation="landscape" />
+	       <activity android:screenOrientation="landscape" /> -->
 	   </edit-config>
 
 	</platform>
