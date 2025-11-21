@@ -13,6 +13,9 @@ class RPSGamePlugin: CDVPlugin {
                 return
             }
 
+            // Set fullscreen presentation style
+            vc.modalPresentationStyle = .fullScreen
+
             if let root = self.viewController {
                 root.present(vc, animated: true) {
                     let result = CDVPluginResult(status: .ok)

@@ -118,16 +118,17 @@ class RPSDetectionViewController: UIViewController {
         super.viewDidAppear(animated)
 
         // Force rotation to landscape after view is in window hierarchy
-        DispatchQueue.main.async {
-            if #available(iOS 16.0, *) {
-                if let windowScene = self.view.window?.windowScene {
-                    windowScene.requestGeometryUpdate(.iOS(interfaceOrientations: .landscapeLeft))
+        if #available(iOS 16.0, *) {
+            if let windowScene = self.view.window?.windowScene {
+                let geometryPreferences = UIWindowScene.GeometryPreferences.iOS(interfaceOrientations: .landscapeLeft)
+                windowScene.requestGeometryUpdate(geometryPreferences) { error in
+                    print("Geometry update error: \(error)")
                 }
-            } else {
-                UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
             }
-            UIViewController.attemptRotationToDeviceOrientation()
+        } else {
+            UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
         }
+        UIViewController.attemptRotationToDeviceOrientation()
 
         startCameraSession()
         updateConnectionsForCurrentInterfaceOrientation()
