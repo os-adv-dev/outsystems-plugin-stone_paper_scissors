@@ -121,15 +121,12 @@ class RPSDetectionViewController: UIViewController {
         if #available(iOS 16.0, *) {
             if let windowScene = self.view.window?.windowScene {
                 let geometryPreferences = UIWindowScene.GeometryPreferences.iOS(interfaceOrientations: .landscapeLeft)
-                windowScene.requestGeometryUpdate(geometryPreferences) { error in
-                    if let error = error {
-                        print("Geometry update error: \(error)")
-                    }
-                    // Update camera after rotation completes
-                    DispatchQueue.main.async {
-                        self.updateConnectionsForCurrentInterfaceOrientation()
-                        self.startCameraSession()
-                    }
+                windowScene.requestGeometryUpdate(geometryPreferences)
+
+                // Update camera after a brief delay to ensure rotation completes
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.updateConnectionsForCurrentInterfaceOrientation()
+                    self.startCameraSession()
                 }
             }
         } else {
