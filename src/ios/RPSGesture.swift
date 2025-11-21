@@ -122,16 +122,26 @@ class RPSDetectionViewController: UIViewController {
             if let windowScene = self.view.window?.windowScene {
                 let geometryPreferences = UIWindowScene.GeometryPreferences.iOS(interfaceOrientations: .landscapeLeft)
                 windowScene.requestGeometryUpdate(geometryPreferences) { error in
-                    print("Geometry update error: \(error)")
+                    if let error = error {
+                        print("Geometry update error: \(error)")
+                    }
+                    // Update camera after rotation completes
+                    DispatchQueue.main.async {
+                        self.updateConnectionsForCurrentInterfaceOrientation()
+                        self.startCameraSession()
+                    }
                 }
             }
         } else {
             UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
-        }
-        UIViewController.attemptRotationToDeviceOrientation()
+            UIViewController.attemptRotationToDeviceOrientation()
 
-        startCameraSession()
-        updateConnectionsForCurrentInterfaceOrientation()
+            // Delay camera setup to ensure rotation completes first
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.updateConnectionsForCurrentInterfaceOrientation()
+                self.startCameraSession()
+            }
+        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
