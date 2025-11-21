@@ -103,6 +103,7 @@ class RPSDetectionViewController: UIViewController {
         super.viewDidLoad()
         UIApplication.shared.isIdleTimerDisabled = true
         setupUI()
+        setupCloseButton()
         setupMediaPipe()
         setupCamera()
         pinPreviewToEdges()
@@ -169,6 +170,31 @@ class RPSDetectionViewController: UIViewController {
 
     override var shouldAutorotate: Bool {
         return false
+    }
+
+    // MARK: - Close Button
+    private func setupCloseButton() {
+        let closeButton = UIButton(type: .system)
+        closeButton.setTitle("✕", for: .normal)
+        closeButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 28)
+        closeButton.setTitleColor(.white, for: .normal)
+        closeButton.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        closeButton.layer.cornerRadius = 25
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+
+        view.addSubview(closeButton)
+
+        NSLayoutConstraint.activate([
+            closeButton.widthAnchor.constraint(equalToConstant: 50),
+            closeButton.heightAnchor.constraint(equalToConstant: 50),
+            closeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            closeButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+        ])
+    }
+
+    @objc private func closeButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
     }
 
     // MARK: - Setup
