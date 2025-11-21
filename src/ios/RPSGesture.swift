@@ -110,8 +110,8 @@ class RPSDetectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Enable landscape orientation for RPS screen
-        if let mainVC = NSClassFromString("MainViewController") {
-            mainVC.perform(Selector("setRPSScreenActive:"), with: true)
+        if let mainVCClass = NSClassFromString("MainViewController") as? NSObject.Type {
+            _ = mainVCClass.perform(Selector("setRPSScreenActive:"), with: NSNumber(value: true))
         }
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -122,8 +122,8 @@ class RPSDetectionViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Restore portrait orientation when leaving RPS screen
-        if let mainVC = NSClassFromString("MainViewController") {
-            mainVC.perform(Selector("setRPSScreenActive:"), with: false)
+        if let mainVCClass = NSClassFromString("MainViewController") as? NSObject.Type {
+            _ = mainVCClass.perform(Selector("setRPSScreenActive:"), with: NSNumber(value: false))
         }
     }
     override func viewDidDisappear(_ animated: Bool) {
