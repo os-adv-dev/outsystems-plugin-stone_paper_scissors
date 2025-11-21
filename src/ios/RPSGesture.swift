@@ -113,6 +113,15 @@ class RPSDetectionViewController: UIViewController {
         if let mainVCClass = NSClassFromString("MainViewController") as? NSObject.Type {
             _ = mainVCClass.perform(Selector("setRPSScreenActive:"), with: NSNumber(value: true))
         }
+
+        // Force rotation to landscape
+        if #available(iOS 16.0, *) {
+            guard let windowScene = self.view.window?.windowScene else { return }
+            windowScene.requestGeometryUpdate(.iOS(interfaceOrientations: .landscapeLeft))
+        } else {
+            UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
+        }
+        UIViewController.attemptRotationToDeviceOrientation()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -125,6 +134,15 @@ class RPSDetectionViewController: UIViewController {
         if let mainVCClass = NSClassFromString("MainViewController") as? NSObject.Type {
             _ = mainVCClass.perform(Selector("setRPSScreenActive:"), with: NSNumber(value: false))
         }
+
+        // Force rotation back to portrait
+        if #available(iOS 16.0, *) {
+            guard let windowScene = self.view.window?.windowScene else { return }
+            windowScene.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
+        } else {
+            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+        }
+        UIViewController.attemptRotationToDeviceOrientation()
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
