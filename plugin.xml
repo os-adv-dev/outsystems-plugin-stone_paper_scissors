@@ -82,6 +82,7 @@
 		<resource-file src="src/android/res/drawable/instructions_bg.xml" target="res/drawable/instructions_bg.xml" />
 		<resource-file src="src/android/res/drawable/button_bg.xml" target="res/drawable/button_bg.xml" />
 		<resource-file src="src/android/res/drawable/ic_hand.xml" target="res/drawable/ic_hand.xml" />
+		<resource-file src="src/android/res/drawable/ic_close_circle.xml" target="res/drawable/ic_close_circle.xml" />
 		
 		<!-- Gradle Dependencies -->
 		<framework src="src/android/build.gradle" custom="true" type="gradleReference" />

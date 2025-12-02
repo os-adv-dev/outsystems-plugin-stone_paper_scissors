@@ -3,19 +3,14 @@ package com.outsystems.plugins.rpsgame;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.HandlerThread;
 import android.util.Log;
 import android.util.Size;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,10 +34,8 @@ import com.google.mediapipe.tasks.core.BaseOptions;
 import com.google.mediapipe.tasks.vision.core.RunningMode;
 import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarker;
 import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarkerResult;
-import com.google.mediapipe.tasks.components.containers.Category;
 import com.google.mediapipe.tasks.components.containers.NormalizedLandmark;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,6 +57,7 @@ public class RPSDetectionActivity extends AppCompatActivity {
     private ImageView handImage;
     private View playersBgView;
     private OverlayView overlayView;
+    private ImageButton closeButton;
 
     // Camera
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
@@ -73,8 +67,6 @@ public class RPSDetectionActivity extends AppCompatActivity {
 
     // MediaPipe
     private HandLandmarker handLandmarker;
-    private int frameWidth = 0;
-    private int frameHeight = 0;
     private List<HandDetection> lastDetections = new ArrayList<>();
 
     @Override
@@ -112,6 +104,7 @@ public class RPSDetectionActivity extends AppCompatActivity {
         handImage = findViewById(getResources().getIdentifier("handImage", "id", packageName));
         playersBgView = findViewById(getResources().getIdentifier("playersBgView", "id", packageName));
         overlayView = findViewById(getResources().getIdentifier("overlayView", "id", packageName));
+        closeButton = findViewById(getResources().getIdentifier("closeButton", "id", packageName));
     }
 
     private void setupUI() {
@@ -122,6 +115,9 @@ public class RPSDetectionActivity extends AppCompatActivity {
 
         // Hide player labels initially
         playersBgView.setVisibility(View.GONE);
+
+        // Setup close button click listener
+        closeButton.setOnClickListener(v -> finish());
 
         // Auto-hide instructions after 3 seconds
         new Handler().postDelayed(() -> {
@@ -199,9 +195,6 @@ public class RPSDetectionActivity extends AppCompatActivity {
             imageProxy.close();
             return;
         }
-
-        frameWidth = imageProxy.getWidth();
-        frameHeight = imageProxy.getHeight();
 
         // Convert ImageProxy to Bitmap
         Bitmap bitmap = imageProxy.toBitmap();
